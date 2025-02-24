@@ -7,7 +7,7 @@ try {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone', // Potrebné pre Cloudflare Pages
+  output: 'export',  // Zmenené z 'standalone' na 'export'
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -16,7 +16,7 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    domains: ['res.cloudinary.com'], // Pre Cloudinary obrázky
+    domains: ['res.cloudinary.com'],
   },
   experimental: {
     webpackBuildWorker: true,
@@ -25,10 +25,9 @@ const nextConfig = {
   }
 }
 
-// Opravená mergeConfig funkcia
 function mergeConfig(baseConfig, userConfig) {
   if (!userConfig) {
-    return baseConfig // Vráti základnú konfiguráciu ak nie je user config
+    return baseConfig
   }
 
   const mergedConfig = { ...baseConfig }
@@ -47,7 +46,7 @@ function mergeConfig(baseConfig, userConfig) {
     }
   }
 
-  return mergedConfig // Vráti zlúčenú konfiguráciu
+  return mergedConfig
 }
 
 export default mergeConfig(nextConfig, userConfig)
